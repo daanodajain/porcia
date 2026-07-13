@@ -1,0 +1,188 @@
+/* Ultra-Luxury Typography System */
+
+@layer base {
+  /* === BASE TYPOGRAPHY === */
+  body {
+    font-family: var(--porcia-font-sans);
+    font-size: var(--porcia-text-base);
+    line-height: var(--porcia-leading-normal);
+    letter-spacing: var(--porcia-tracking-normal);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  /* === DISPLAY HEADINGS (Serif - for hero sections) === */
+  .porcia-display-1 {
+    font-family: var(--porcia-font-display);
+    font-size: clamp(3rem, 8vw, var(--porcia-text-6xl));
+    line-height: var(--porcia-leading-none);
+    letter-spacing: var(--porcia-tracking-tighter);
+    font-weight: 400;
+  }
+  
+  .porcia-display-2 {
+    font-family: var(--porcia-font-display);
+    font-size: clamp(2.5rem, 6vw, var(--porcia-text-5xl));
+    line-height: var(--porcia-leading-tight);
+    letter-spacing: var(--porcia-tracking-tight);
+    font-weight: 400;
+  }
+
+  /* === HEADINGS (Serif) === */
+  .porcia-h1 {
+    font-family: var(--porcia-font-display);
+    font-size: clamp(2rem, 4vw, var(--porcia-text-4xl));
+    line-height: var(--porcia-leading-tight);
+    letter-spacing: var(--porcia-tracking-tight);
+    font-weight: 400;
+  }
+
+  .porcia-h2 {
+    font-family: var(--porcia-font-display);
+    font-size: clamp(1.75rem, 3vw, var(--porcia-text-3xl));
+    line-height: var(--porcia-leading-tight);
+    letter-spacing: var(--porcia-tracking-tight);
+    font-weight: 400;
+  }
+
+  .porcia-h3 {
+    font-family: var(--porcia-font-display);
+    font-size: var(--porcia-text-2xl);
+    line-height: var(--porcia-leading-snug);
+    letter-spacing: var(--porcia-tracking-normal);
+    font-weight: 400;
+  }
+
+  .porcia-h4 {
+    font-family: var(--porcia-font-sans);
+    font-size: var(--porcia-text-xl);
+    line-height: var(--porcia-leading-snug);
+    letter-spacing: var(--porcia-tracking-normal);
+    font-weight: 500;
+  }
+
+  .porcia-h5 {
+    font-family: var(--porcia-font-sans);
+    font-size: var(--porcia-text-lg);
+    line-height: var(--porcia-leading-normal);
+    letter-spacing: var(--porcia-tracking-normal);
+    font-weight: 500;
+  }
+
+  /* === BODY TEXT === */
+  .porcia-body-lg {
+    font-size: var(--porcia-text-lg);
+    line-height: var(--porcia-leading-relaxed);
+    letter-spacing: var(--porcia-tracking-normal);
+    color: var(--porcia-text-secondary);
+  }
+
+  .porcia-body {
+    font-size: var(--porcia-text-base);
+    line-height: var(--porcia-leading-normal);
+    letter-spacing: var(--porcia-tracking-normal);
+  }
+
+  .porcia-body-sm {
+    font-size: var(--porcia-text-sm);
+    line-height: var(--porcia-leading-normal);
+    letter-spacing: var(--porcia-tracking-normal);
+  }
+
+  /* === LABELS & METADATA (Uppercase, wide spacing) === */
+  .porcia-label {
+    font-size: var(--porcia-text-xs);
+    line-height: var(--porcia-leading-none);
+    letter-spacing: var(--porcia-tracking-luxury);
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--porcia-text-muted);
+  }
+
+  .porcia-label-sm {
+    font-size: 0.625rem; /* 10px */
+    line-height: var(--porcia-leading-none);
+    letter-spacing: var(--porcia-tracking-display);
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--porcia-text-muted);
+  }
+
+  /* === BRAND NAME === */
+  .porcia-brand {
+    font-family: var(--porcia-font-display);
+    font-size: var(--porcia-text-xl);
+    line-height: var(--porcia-leading-none);
+    letter-spacing: var(--porcia-tracking-display);
+    font-weight: 300;
+  }
+
+  /* === LINKS === */
+  .porcia-link {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: color var(--porcia-duration-base) var(--porcia-ease-out);
+  }
+
+  .porcia-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--porcia-duration-slow) var(--porcia-ease-out);
+  }
+
+  .porcia-link:hover::after {
+    width: 100%;
+  }
+
+  /* === PRICE === */
+  .porcia-price {
+    font-family: var(--porcia-font-sans);
+    font-size: var(--porcia-text-lg);
+    line-height: var(--porcia-leading-none);
+    letter-spacing: var(--porcia-tracking-normal);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .porcia-price-large {
+    font-size: var(--porcia-text-2xl);
+    font-weight: 400;
+  }
+
+  .porcia-price-original {
+    font-size: var(--porcia-text-base);
+    color: var(--porcia-text-muted);
+    text-decoration: line-through;
+    font-weight: 400;
+  }
+
+  /* === UTILITIES === */
+  .porcia-serif {
+    font-family: var(--porcia-font-display);
+  }
+
+  .porcia-mono {
+    font-family: var(--porcia-font-mono);
+  }
+
+  .porcia-uppercase {
+    text-transform: uppercase;
+    letter-spacing: var(--porcia-tracking-wider);
+  }
+
+  .porcia-text-muted {
+    color: var(--porcia-text-muted);
+  }
+
+  .porcia-text-secondary {
+    color: var(--porcia-text-secondary);
+  }
+}

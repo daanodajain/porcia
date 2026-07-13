@@ -1,0 +1,400 @@
+/* === MOBILE-FIRST RESPONSIVE UTILITIES === */
+
+@layer utilities {
+  /* === CONTAINER RESPONSIVENESS === */
+  .porcia-container {
+    width: 100%;
+    max-width: var(--porcia-container);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px mobile */
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .porcia-container {
+      padding-left: 1.5rem; /* 24px tablet */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .porcia-container {
+      padding-left: var(--porcia-gutter); /* 32px desktop */
+      padding-right: var(--porcia-gutter);
+    }
+  }
+
+  /* === ASPECT RATIOS === */
+  .porcia-aspect-square {
+    position: relative;
+    padding-bottom: 100%;
+    overflow: hidden;
+  }
+
+  .porcia-aspect-portrait {
+    position: relative;
+    padding-bottom: 133.33%; /* 3:4 */
+    overflow: hidden;
+  }
+
+  .porcia-aspect-landscape {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    overflow: hidden;
+  }
+
+  .porcia-aspect-card {
+    position: relative;
+    padding-bottom: 125%; /* 4:5 - like Instagram */
+    overflow: hidden;
+  }
+
+  .porcia-aspect-square > *,
+  .porcia-aspect-portrait > *,
+  .porcia-aspect-landscape > *,
+  .porcia-aspect-card > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* === DIVIDERS === */
+  .porcia-divider {
+    height: 1px;
+    background: var(--porcia-border);
+    border: none;
+  }
+
+  .porcia-divider-vertical {
+    width: 1px;
+    height: 100%;
+    background: var(--porcia-border);
+  }
+
+  /* === GLASS EFFECTS === */
+  .porcia-glass {
+    background: var(--porcia-glass);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+  }
+
+  .porcia-glass-strong {
+    background: var(--porcia-surface);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+  }
+
+  /* === SMOOTH ANIMATIONS === */
+  .porcia-transition {
+    transition: all var(--porcia-duration-base) var(--porcia-ease-out);
+  }
+
+  .porcia-transition-slow {
+    transition: all var(--porcia-duration-slow) var(--porcia-ease-out);
+  }
+
+  .porcia-transition-slower {
+    transition: all var(--porcia-duration-slower) var(--porcia-ease-out);
+  }
+
+  .porcia-transition-colors {
+    transition: color var(--porcia-duration-base) var(--porcia-ease-out),
+                background-color var(--porcia-duration-base) var(--porcia-ease-out),
+                border-color var(--porcia-duration-base) var(--porcia-ease-out);
+  }
+
+  .porcia-transition-transform {
+    transition: transform var(--porcia-duration-slow) var(--porcia-ease-out);
+  }
+
+  /* === OVERLAYS === */
+  .porcia-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--porcia-overlay);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 40;
+  }
+
+  /* === LUXURY GRADIENTS === */
+  .porcia-gradient-gold {
+    background: linear-gradient(135deg, var(--porcia-gold-light) 0%, var(--porcia-gold) 100%);
+  }
+
+  .porcia-gradient-ivory {
+    background: linear-gradient(180deg, var(--porcia-ivory) 0%, var(--porcia-bg) 100%);
+  }
+
+  .porcia-gradient-fade {
+    background: linear-gradient(180deg, transparent 0%, var(--porcia-bg) 100%);
+  }
+
+  /* === HOVER EFFECTS (Desktop Only) === */
+  @media (hover: hover) {
+    .porcia-hover-lift {
+      transition: transform var(--porcia-duration-slow) var(--porcia-ease-out),
+                  box-shadow var(--porcia-duration-slow) var(--porcia-ease-out);
+    }
+
+    .porcia-hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--porcia-shadow-elevated);
+    }
+
+    .porcia-hover-scale {
+      transition: transform var(--porcia-duration-slower) var(--porcia-ease-out);
+    }
+
+    .porcia-hover-scale:hover {
+      transform: scale(1.02);
+    }
+
+    .porcia-hover-opacity {
+      transition: opacity var(--porcia-duration-base) var(--porcia-ease-out);
+    }
+
+    .porcia-hover-opacity:hover {
+      opacity: 0.6;
+    }
+  }
+
+  /* === IMAGE EFFECTS === */
+  .porcia-image-zoom {
+    overflow: hidden;
+  }
+
+  .porcia-image-zoom img {
+    transition: transform var(--porcia-duration-slower) var(--porcia-ease-out);
+  }
+
+  @media (hover: hover) {
+    .porcia-image-zoom:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  /* === FOCUS STATES === */
+  .porcia-focus {
+    outline: none;
+    transition: box-shadow var(--porcia-duration-base) var(--porcia-ease-out);
+  }
+
+  .porcia-focus:focus-visible {
+    box-shadow: 0 0 0 2px var(--porcia-bg), 0 0 0 4px var(--porcia-gold);
+  }
+
+  /* === SCROLLBAR (Desktop Only) === */
+  @media (min-width: 1024px) {
+    .porcia-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    .porcia-scrollbar::-webkit-scrollbar-track {
+      background: var(--porcia-border-light);
+    }
+
+    .porcia-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--porcia-border);
+      border-radius: var(--porcia-radius-full);
+    }
+
+    .porcia-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: var(--porcia-text-muted);
+    }
+  }
+
+  /* === LUXURY BUTTON BASE === */
+  .porcia-btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--porcia-font-sans);
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    transition: all var(--porcia-duration-base) var(--porcia-ease-out);
+    touch-action: manipulation; /* Better mobile tap */
+  }
+
+  .porcia-btn-base:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .porcia-btn-base:active {
+    transform: scale(0.98); /* Press feedback on mobile */
+  }
+
+  /* === MOBILE TOUCH OPTIMIZATION === */
+  .porcia-touch-target {
+    min-height: 44px; /* iOS recommended minimum */
+    min-width: 44px;
+  }
+
+  /* === STACKED LAYOUT (Mobile) === */
+  .porcia-stack-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .porcia-stack-mobile {
+      flex-direction: row;
+    }
+  }
+
+  /* === HIDE ON MOBILE === */
+  @media (max-width: 767px) {
+    .porcia-hide-mobile {
+      display: none !important;
+    }
+  }
+
+  /* === SHOW ON MOBILE ONLY === */
+  .porcia-show-mobile {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .porcia-show-mobile {
+      display: none !important;
+    }
+  }
+
+  /* === FADE IN ANIMATION === */
+  @keyframes porcia-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .porcia-animate-in {
+    animation: porcia-fade-in 0.6s var(--porcia-ease-out) forwards;
+  }
+
+  /* === SLIDE UP ANIMATION === */
+  @keyframes porcia-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .porcia-animate-slide-up {
+    animation: porcia-slide-up 0.8s var(--porcia-ease-out) forwards;
+  }
+
+  /* === SCALE IN ANIMATION === */
+  @keyframes porcia-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .porcia-animate-scale {
+    animation: porcia-scale-in 0.5s var(--porcia-ease-out) forwards;
+  }
+
+  /* === SHIMMER LOADING EFFECT === */
+  @keyframes porcia-shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .porcia-loading {
+    background: linear-gradient(
+      90deg,
+      var(--porcia-border-light) 0%,
+      var(--porcia-border) 50%,
+      var(--porcia-border-light) 100%
+    );
+    background-size: 1000px 100%;
+    animation: porcia-shimmer 2s infinite;
+  }
+
+  /* === STAGGER ANIMATIONS (for lists) === */
+  .porcia-stagger > * {
+    animation: porcia-fade-in 0.6s var(--porcia-ease-out) forwards;
+    opacity: 0;
+  }
+
+  .porcia-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+  .porcia-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+  .porcia-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+  .porcia-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+  .porcia-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+  .porcia-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+  .porcia-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+  .porcia-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+
+  /* === PARALLAX SCROLL (subtle) === */
+  @media (min-width: 1024px) {
+    .porcia-parallax {
+      transform: translateY(0);
+      transition: transform 0.3s ease-out;
+    }
+  }
+
+  /* === SKELETON LOADING === */
+  .porcia-skeleton {
+    background: var(--porcia-border-light);
+    border-radius: var(--porcia-radius-lg);
+    animation: porcia-shimmer 2s infinite;
+  }
+
+  /* === SMOOTH SCROLL SNAP (Mobile) === */
+  @media (max-width: 767px) {
+    .porcia-scroll-snap-x {
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .porcia-scroll-snap-x > * {
+      scroll-snap-align: start;
+    }
+  }
+}
+
+/* === REDUCE MOTION (Accessibility) === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .porcia-image-zoom img {
+    transition: none;
+  }
+}

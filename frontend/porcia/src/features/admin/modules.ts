@@ -1,0 +1,16 @@
+export const adminModules = [
+  "Dashboard",
+  "Products",
+  "Categories",
+  "Collections",
+  "Inventory",
+  "Customers",
+  "Orders",
+  "Payments",
+  "Coupons",
+  "Reviews",
+  "Analytics",
+  "Settings",
+  "Roles",
+  "Admin Users",
+] as const;

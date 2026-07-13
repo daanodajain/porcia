@@ -1,0 +1,177 @@
+server:
+  port: 8080
+  
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  
+  forward-headers-strategy: framework
+  
+  shutdown: graceful
+  
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+    include-exception: false
+    whitelabel:
+      enabled: false
+  
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  
+  application:
+    name: porcia-backend
+  
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/porcia}
+    username: ${DB_USERNAME:porcia}
+    password: ${DB_PASSWORD:porcia}
+    driver-class-name: org.postgresql.Driver
+    
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 20000
+      pool-name: PorciaHikariPool
+      auto-commit: true
+      leak-detection-threshold: 60000
+      validation-timeout: 5000
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        use_sql_comments: false
+        jdbc:
+          batch_size: 50
+          fetch_size: 50
+          statement_batch_size: 50
+        order_inserts: true
+        order_updates: true
+        query:
+          in_clause_parameter_padding: true
+        enable_lazy_load_no_trans: false
+        generate_statistics: false
+    
+    show-sql: false
+    open-in-view: false
+  
+  transaction:
+    default-timeout: 30
+  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 1
+    validate-on-migrate: false
+    out-of-order: false
+    placeholder-replacement: false
+  
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      indent-output: false
+    
+    deserialization:
+      fail-on-unknown-properties: false
+    
+    default-property-inclusion: non_null
+    
+    time-zone: UTC
+
+logging:
+  level:
+    root: INFO
+    com.porcia.backend: INFO
+    org.springframework: INFO
+    org.hibernate: WARN
+    org.springframework.security: INFO
+    CMS_AUDIT: INFO
+  
+  file:
+    name: ${LOG_FILE_PATH:/opt/porcia/logs/backend.log}
+    max-size: 10MB
+    max-history: 30
+  
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  
+  show-actuator: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  
+  endpoint:
+    health:
+      show-details: when-authorized
+      roles: ADMIN
+    
+    info:
+      enabled: true
+  
+  health:
+    defaults:
+      enabled: true
+    db:
+      enabled: true
+  
+  metrics:
+    enable:
+      jvm: true
+      process: true
+      system: true
+      logback: true
+    export:
+      prometheus:
+        enabled: true
+
+security:
+  jwt:
+    issuer: porcia
+    secret: ${JWT_SECRET}
+    access-token-ttl-seconds: ${JWT_ACCESS_TTL:900}
+    refresh-token-ttl-seconds: ${JWT_REFRESH_TTL:2592000}
+  
+  allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:3001}
+
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID:}
+  key-secret: ${RAZORPAY_KEY_SECRET:}
+  webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+
+app:
+  upload:
+    dir: ${UPLOAD_DIR:/opt/porcia/uploads}
+    max-size: ${UPLOAD_MAX_SIZE:10485760}

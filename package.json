@@ -1,0 +1,11 @@
+{
+  "name": "porcia-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production npm run build --prefix frontend/porcia",
+    "dev": "npm run dev --prefix frontend/porcia",
+    "start": "npm run start --prefix frontend/porcia",
+    "lint": "npm run lint --prefix frontend/porcia"
+  }
+}

@@ -1,0 +1,126 @@
+/* Ultra-Luxury Design System — Dior / LV / Gucci Level */
+
+@layer base {
+  :root {
+    /* === COLORS === */
+    /* Pure whites & blacks */
+    --porcia-white: #FFFFFF;
+    --porcia-black: #000000;
+    --porcia-ivory: #FAF8F5;
+    --porcia-charcoal: #1A1A1A;
+    
+    /* Neutral palette (Dior-inspired) */
+    --porcia-bg: #FDFCFB;
+    --porcia-fg: #0D0D0D;
+    --porcia-text-secondary: #4A4A4A;
+    --porcia-text-muted: #8C8C8C;
+    --porcia-border: #E8E8E8;
+    --porcia-border-light: #F5F5F5;
+    
+    /* Premium accents */
+    --porcia-gold: #C9A961;
+    --porcia-gold-dark: #A88B4E;
+    --porcia-gold-light: #E5D4A6;
+    
+    /* Surface & overlays */
+    --porcia-surface: rgba(255, 255, 255, 0.92);
+    --porcia-overlay: rgba(0, 0, 0, 0.60);
+    --porcia-glass: rgba(255, 255, 255, 0.75);
+    
+    /* Semantic */
+    --porcia-error: #C41E3A;
+    --porcia-success: #2D5016;
+    
+    /* === TYPOGRAPHY === */
+    /* Premium font stacks */
+    --porcia-font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+    --porcia-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --porcia-font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    
+    /* Font sizes (precise scale) */
+    --porcia-text-xs: 0.6875rem;    /* 11px */
+    --porcia-text-sm: 0.8125rem;    /* 13px */
+    --porcia-text-base: 0.9375rem;  /* 15px */
+    --porcia-text-md: 1rem;         /* 16px */
+    --porcia-text-lg: 1.125rem;     /* 18px */
+    --porcia-text-xl: 1.375rem;     /* 22px */
+    --porcia-text-2xl: 1.75rem;     /* 28px */
+    --porcia-text-3xl: 2.25rem;     /* 36px */
+    --porcia-text-4xl: 3rem;        /* 48px */
+    --porcia-text-5xl: 3.75rem;     /* 60px */
+    --porcia-text-6xl: 5rem;        /* 80px */
+    
+    /* Line heights */
+    --porcia-leading-none: 1;
+    --porcia-leading-tight: 1.15;
+    --porcia-leading-snug: 1.35;
+    --porcia-leading-normal: 1.5;
+    --porcia-leading-relaxed: 1.7;
+    --porcia-leading-loose: 2;
+    
+    /* Letter spacing (luxury = more space) */
+    --porcia-tracking-tighter: -0.03em;
+    --porcia-tracking-tight: -0.015em;
+    --porcia-tracking-normal: 0;
+    --porcia-tracking-wide: 0.025em;
+    --porcia-tracking-wider: 0.05em;
+    --porcia-tracking-widest: 0.1em;
+    --porcia-tracking-luxury: 0.15em;     /* For uppercase labels */
+    --porcia-tracking-display: 0.25em;    /* For brand names */
+    
+    /* === SPACING === */
+    --porcia-space-1: 0.25rem;   /* 4px */
+    --porcia-space-2: 0.5rem;    /* 8px */
+    --porcia-space-3: 0.75rem;   /* 12px */
+    --porcia-space-4: 1rem;      /* 16px */
+    --porcia-space-5: 1.5rem;    /* 24px */
+    --porcia-space-6: 2rem;      /* 32px */
+    --porcia-space-7: 2.5rem;    /* 40px */
+    --porcia-space-8: 3rem;      /* 48px */
+    --porcia-space-9: 4rem;      /* 64px */
+    --porcia-space-10: 5rem;     /* 80px */
+    --porcia-space-11: 6rem;     /* 96px */
+    --porcia-space-12: 8rem;     /* 128px */
+    
+    /* === RADIUS === */
+    --porcia-radius-none: 0;
+    --porcia-radius-sm: 0.125rem;   /* 2px - minimal */
+    --porcia-radius-md: 0.25rem;    /* 4px - subtle */
+    --porcia-radius-lg: 0.5rem;     /* 8px - standard */
+    --porcia-radius-full: 9999px;
+    
+    /* === SHADOWS === */
+    --porcia-shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --porcia-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --porcia-shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --porcia-shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.10);
+    --porcia-shadow-luxury: 0 20px 60px rgba(0, 0, 0, 0.12);
+    
+    /* === TRANSITIONS === */
+    --porcia-duration-fast: 150ms;
+    --porcia-duration-base: 250ms;
+    --porcia-duration-slow: 350ms;
+    --porcia-duration-slower: 500ms;
+    --porcia-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --porcia-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+    
+    /* === LAYOUT === */
+    --porcia-container: 1440px;
+    --porcia-container-narrow: 1200px;
+    --porcia-container-wide: 1800px;
+    --porcia-gutter: 2rem;
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] {
+    --porcia-bg: #0A0A0A;
+    --porcia-fg: #F5F5F5;
+    --porcia-text-secondary: #B3B3B3;
+    --porcia-text-muted: #6B6B6B;
+    --porcia-border: #262626;
+    --porcia-border-light: #1A1A1A;
+    --porcia-surface: rgba(20, 20, 20, 0.92);
+    --porcia-glass: rgba(20, 20, 20, 0.75);
+    --porcia-overlay: rgba(0, 0, 0, 0.85);
+  }
+}

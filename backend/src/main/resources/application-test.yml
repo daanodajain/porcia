@@ -1,0 +1,54 @@
+# Test Profile
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+    
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    
+    show-sql: true
+  
+  flyway:
+    enabled: false
+  
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.porcia.backend: DEBUG
+    org.springframework: WARN
+    org.hibernate: INFO
+
+springdoc:
+  swagger-ui:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+security:
+  jwt:
+    secret: test-secret-key-for-unit-tests-only-minimum-32-bytes-required
+    access-token-ttl-seconds: 3600
+  
+  allowed-origins: http://localhost:3000

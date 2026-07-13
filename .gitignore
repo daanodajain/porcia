@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+fix_admin_password.sql
+frontend/porcia.zip
+frontend/porcia/porcia-build.tar.gz
+frontend/porcia/.env.local
+frontend/porcia/.env.production
+backend/.env
+backend/.env.*
+backend/target/

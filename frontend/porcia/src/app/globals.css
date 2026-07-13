@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@import "../styles/design/tokens.css";
+@import "../styles/design/typography.css";
+@import "../styles/design/utilities.css";
+@import "../styles/design/bridge.css";
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--porcia-font-sans);
+    background: var(--porcia-bg);
+    color: var(--porcia-fg);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* === GLOBAL LUXURY SCROLLBAR === */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--porcia-border) var(--porcia-border-light);
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--porcia-border-light);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--porcia-border);
+    border-radius: var(--porcia-radius-full);
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--porcia-text-muted);
+  }
+
+  /* === SELECTION === */
+  ::selection {
+    background: var(--porcia-gold-light);
+    color: var(--porcia-black);
+  }
+
+  /* === FOCUS === */
+  :focus-visible {
+    outline: 2px solid var(--porcia-gold);
+    outline-offset: 2px;
+  }
+
+  /* === IMAGE OPTIMIZATION === */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* === BUTTON RESET === */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* === LINK RESET === */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* === CUSTOM UTILITIES === */
+@layer utilities {
+  .porcia-text-balance {
+    text-wrap: balance;
+  }
+
+  .porcia-text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Luxury fade-in animation */
+  @keyframes porcia-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .porcia-animate-in {
+    animation: porcia-fade-in 0.6s var(--porcia-ease-out) forwards;
+  }
+
+  /* Shimmer loading effect */
+  @keyframes porcia-shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .porcia-loading {
+    background: linear-gradient(
+      90deg,
+      var(--porcia-border-light) 0%,
+      var(--porcia-border) 50%,
+      var(--porcia-border-light) 100%
+    );
+    background-size: 1000px 100%;
+    animation: porcia-shimmer 2s infinite;
+  }
+
+  /* WordPress editorial content */
+  .wp-content {
+    display: grid;
+    gap: 1.25rem;
+    color: var(--porcia-text-secondary);
+    line-height: 1.85;
+  }
+
+  .wp-content :is(h1, h2, h3, h4) {
+    color: var(--porcia-fg);
+    font-family: var(--porcia-font-serif);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: 1.5rem;
+  }
+
+  .wp-content h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  .wp-content h2 {
+    font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+  }
+
+  .wp-content h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .wp-content p,
+  .wp-content li {
+    font-size: 1rem;
+  }
+
+  .wp-content a {
+    color: var(--porcia-gold);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .wp-content ul,
+  .wp-content ol {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .wp-content blockquote {
+    border-left: 1px solid var(--porcia-gold);
+    padding-left: 1.25rem;
+    color: var(--porcia-fg);
+    font-family: var(--porcia-font-serif);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin: 1rem 0;
+  }
+
+  .wp-content img {
+    border-radius: 1rem;
+    margin: 1rem 0;
+  }
+
+  .wp-content figure {
+    margin: 1rem 0;
+  }
+
+  .porcia-admin-shell {
+    color: #111827;
+  }
+
+  .porcia-admin-content > div {
+    max-width: 100%;
+  }
+
+  .porcia-admin-content table {
+    min-width: 760px;
+  }
+
+  .porcia-admin-content [style*="overflow: hidden"]:has(table) {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .porcia-admin-content input,
+  .porcia-admin-content select,
+  .porcia-admin-content textarea,
+  .porcia-admin-login input {
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .porcia-admin-content {
+      padding: 1rem !important;
+    }
+
+    .porcia-admin-main header {
+      padding-inline: 1rem !important;
+    }
+
+    .porcia-admin-content h1 {
+      font-size: 1.25rem !important;
+    }
+
+    .porcia-admin-content form {
+      grid-template-columns: 1fr !important;
+    }
+
+    .porcia-admin-content [style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    .porcia-admin-content [style*="display: flex"] {
+      flex-wrap: wrap;
+    }
+
+    .porcia-admin-content table {
+      min-width: 680px;
+    }
+
+    .porcia-admin-login {
+      padding: 1rem;
+    }
+  }
+}
+
+/* ── WordPress Home Hero Content ─────────────────────────── */
+@layer components {
+  .wp-home-content p:first-child {
+    font-size: 0.68rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--porcia-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .wp-home-content h1,
+  .wp-home-content h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    color: var(--porcia-fg);
+    margin-bottom: 2rem;
+  }
+
+  .wp-home-content p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--porcia-text-secondary);
+    max-width: 34rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .wp-home-content a {
+    display: inline-flex;
+    align-items: center;
+    height: 3rem;
+    border-radius: 9999px;
+    background: var(--porcia-black);
+    color: white;
+    padding: 0 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: opacity 0.2s;
+  }
+
+  .wp-home-content a:hover {
+    opacity: 0.8;
+  }
+
+  .wp-home-content img {
+    display: none; /* Images go in Featured Image, not content */
+  }
+}

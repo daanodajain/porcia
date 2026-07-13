@@ -1,0 +1,420 @@
+/* Ultra-Luxury Animation System */
+
+@layer components {
+  /* === SCROLL ANIMATIONS === */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* === LUXURY SHIMMER EFFECT === */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* === LUXURY GLOW EFFECT === */
+  @keyframes luxuryGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(201, 169, 97, 0.6);
+    }
+  }
+
+  .luxury-glow {
+    animation: luxuryGlow 3s ease-in-out infinite;
+  }
+
+  /* === FLOATING ANIMATION === */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* === PULSE ANIMATION === */
+  @keyframes luxuryPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .luxury-pulse {
+    animation: luxuryPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* === REVEAL ANIMATION === */
+  @keyframes revealText {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .reveal-text {
+    animation: revealText 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* === LUXURY BUTTON ANIMATIONS === */
+  @keyframes buttonHoverGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(201, 169, 97, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(201, 169, 97, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(201, 169, 97, 0);
+    }
+  }
+
+  .button-hover-glow:hover {
+    animation: buttonHoverGlow 0.6s ease-out;
+  }
+
+  /* === SMOOTH TRANSITIONS === */
+  .porcia-transition {
+    transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .porcia-transition-fast {
+    transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .porcia-transition-slow {
+    transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* === LUXURY HOVER EFFECTS === */
+  .luxury-hover-lift {
+    @apply porcia-transition;
+  }
+
+  .luxury-hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  .luxury-hover-scale {
+    @apply porcia-transition;
+  }
+
+  .luxury-hover-scale:hover {
+    transform: scale(1.02);
+  }
+
+  .luxury-hover-glow {
+    @apply porcia-transition;
+  }
+
+  .luxury-hover-glow:hover {
+    box-shadow: 0 0 30px rgba(201, 169, 97, 0.4);
+  }
+
+  /* === LUXURY LINK ANIMATIONS === */
+  .luxury-link {
+    position: relative;
+    @apply porcia-transition;
+  }
+
+  .luxury-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    @apply porcia-transition;
+  }
+
+  .luxury-link:hover::after {
+    width: 100%;
+  }
+
+  /* === STAGGER ANIMATIONS === */
+  .stagger-item {
+    animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .stagger-item:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .stagger-item:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .stagger-item:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .stagger-item:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .stagger-item:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+  .stagger-item:nth-child(n + 6) {
+    animation-delay: calc(0.1s * (n - 5));
+  }
+
+  /* === PARALLAX SCROLL === */
+  .parallax-slow {
+    will-change: transform;
+  }
+
+  /* === LUXURY CARD ANIMATIONS === */
+  .luxury-card {
+    @apply porcia-transition;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .luxury-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    @apply porcia-transition;
+  }
+
+  .luxury-card:hover::before {
+    left: 100%;
+  }
+
+  /* === LUXURY IMAGE ANIMATIONS === */
+  .luxury-image-container {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .luxury-image-container img {
+    @apply porcia-transition;
+  }
+
+  .luxury-image-container:hover img {
+    transform: scale(1.08);
+  }
+
+  /* === LUXURY OVERLAY === */
+  .luxury-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 40;
+  }
+
+  /* === LUXURY DIVIDER === */
+  .luxury-divider {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--porcia-border),
+      transparent
+    );
+  }
+
+  .luxury-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: var(--porcia-gold);
+    border-radius: 50%;
+  }
+
+  /* === LUXURY BADGE === */
+  .luxury-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--porcia-gold);
+    color: var(--porcia-white);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 0;
+    @apply porcia-transition;
+  }
+
+  .luxury-badge:hover {
+    background: var(--porcia-gold-dark);
+    transform: translateY(-2px);
+  }
+
+  /* === LUXURY LOADING === */
+  @keyframes luxuryLoading {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  .luxury-loading {
+    animation: luxuryLoading 1.5s ease-in-out infinite;
+  }
+
+  /* === LUXURY SKELETON === */
+  .luxury-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--porcia-border) 0%,
+      var(--porcia-border-light) 50%,
+      var(--porcia-border) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* === SMOOTH PAGE TRANSITIONS === */
+  @keyframes pageEnter {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pageExit {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  .page-enter {
+    animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .page-exit {
+    animation: pageExit 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* === LUXURY FOCUS STATES === */
+  .luxury-focus:focus-visible {
+    outline: 2px solid var(--porcia-gold);
+    outline-offset: 2px;
+  }
+
+  /* === LUXURY SELECTION === */
+  ::selection {
+    background: var(--porcia-gold);
+    color: var(--porcia-white);
+  }
+
+  ::-moz-selection {
+    background: var(--porcia-gold);
+    color: var(--porcia-white);
+  }
+}
