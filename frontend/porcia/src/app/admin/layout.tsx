@@ -143,18 +143,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Sidebar */}
       <aside
+        id="admin-sidebar"
         style={{
-          position: "fixed", top: 0, bottom: 0, zIndex: 30, width: 240,
+          position: "fixed", top: 0, bottom: 0, left: 0, zIndex: 30, width: 240,
           background: "#fff", borderRight: "1px solid #e5e7eb",
           display: "flex", flexDirection: "column",
+          transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
           transition: "transform 0.25s ease",
         }}
-        className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:static lg:translate-x-0 lg:flex`}
       >
+        <style>{`
+          @media (min-width: 1024px) {
+            #admin-sidebar {
+              position: sticky !important;
+              top: 0 !important;
+              height: 100vh !important;
+              transform: translateX(0) !important;
+              flex-shrink: 0;
+            }
+          }
+        `}</style>
         {/* Logo */}
         <div style={{ height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px", borderBottom: "1px solid #e5e7eb" }}>
           <span style={{ fontFamily: "serif", fontSize: 18, letterSpacing: "0.3em", color: "#111827" }}>PORCIA</span>
-          <button onClick={() => setSidebarOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6b7280" }} className="lg:hidden">
+          <button onClick={() => setSidebarOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", color: "#6b7280", display: "block" }}
+            className="lg:hidden">
             <X size={18} />
           </button>
         </div>
@@ -213,9 +226,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <main style={{ flex: 1, overflow: "auto", minWidth: 0 }}>
         {/* Topbar */}
         <header style={{ height: 60, display: "flex", alignItems: "center", gap: 16, padding: "0 24px", background: "#fff", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 10 }}>
-          <button onClick={() => setSidebarOpen(true)} style={{ background: "none", border: "none", cursor: "pointer", color: "#374151" }} className="lg:hidden">
+          <button onClick={() => setSidebarOpen(true)}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#374151" }}
+            id="admin-hamburger">
             <Menu size={20} />
           </button>
+          <style>{`
+            @media (min-width: 1024px) {
+              #admin-hamburger { display: none !important; }
+            }
+          `}</style>
           <span style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>
             {navItems.find((n) => n.external ? false : pathname && (n.exact ? pathname === n.href : pathname.startsWith(n.href)))?.label ?? "Admin"}
           </span>
