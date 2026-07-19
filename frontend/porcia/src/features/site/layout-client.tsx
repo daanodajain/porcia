@@ -24,7 +24,6 @@ const SHOP_NAV = { href: "/shop", label: "Shop" };
 const accountNav = [
   { href: "/account", label: "Account" },
   { href: "/account/orders", label: "Orders" },
-  { href: "/admin", label: "Admin" },
 ] as const;
 
 function Header({
@@ -43,10 +42,20 @@ function Header({
 
   // On desktop we show a curated short list inline — Collections, House, Journal, Lookbook + Shop
   const DESKTOP_NAV_SLUGS = ["collections", "house", "journal", "lookbook", "craft"];
-  const desktopNav = [
-    ...navItems.filter((item) => DESKTOP_NAV_SLUGS.includes(item.slug)),
-    SHOP_NAV,
+
+  // Fallback nav when WordPress menu is not configured yet
+  const FALLBACK_NAV = [
+    { href: "/shop", label: "Shop", slug: "shop" },
+    { href: "/our-story", label: "House", slug: "house" },
+    { href: "/lookbook", label: "Lookbook", slug: "lookbook" },
+    { href: "/blog", label: "Journal", slug: "journal" },
+    { href: "/contact", label: "Contact", slug: "contact" },
   ];
+
+  const wpDesktopNav = navItems.filter((item) => DESKTOP_NAV_SLUGS.includes(item.slug));
+  const desktopNav = wpDesktopNav.length > 0
+    ? [...wpDesktopNav, SHOP_NAV]
+    : FALLBACK_NAV;
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--porcia-border)] bg-white/95 backdrop-blur-2xl">
@@ -123,7 +132,14 @@ function MenuOverlay({
   footerItems: WordPressNavItem[];
   onClose: () => void;
 }) {
-  const allMainLinks = [...navItems, SHOP_NAV];
+  const FALLBACK_MOBILE_NAV = [
+    { href: "/shop", label: "Shop", slug: "shop" },
+    { href: "/our-story", label: "House", slug: "house" },
+    { href: "/lookbook", label: "Lookbook", slug: "lookbook" },
+    { href: "/blog", label: "Journal", slug: "journal" },
+    { href: "/contact", label: "Contact", slug: "contact" },
+  ];
+  const allMainLinks = navItems.length > 0 ? [...navItems, SHOP_NAV] : FALLBACK_MOBILE_NAV;
 
   return (
     <AnimatePresence>
