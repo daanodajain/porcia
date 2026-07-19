@@ -142,13 +142,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}
 
       {/* Sidebar */}
-      <aside style={{
-        position: "fixed", top: 0, left: sidebarOpen ? 0 : undefined, bottom: 0, zIndex: 30, width: 240,
-        background: "#fff", borderRight: "1px solid #e5e7eb",
-        display: "flex", flexDirection: "column",
-        transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
-      }}
-        className="lg:static lg:translate-x-0 lg:flex"
+      <aside
+        style={{
+          position: "fixed", top: 0, bottom: 0, zIndex: 30, width: 240,
+          background: "#fff", borderRight: "1px solid #e5e7eb",
+          display: "flex", flexDirection: "column",
+          transition: "transform 0.25s ease",
+        }}
+        className={`${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:static lg:translate-x-0 lg:flex`}
       >
         {/* Logo */}
         <div style={{ height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 20px", borderBottom: "1px solid #e5e7eb" }}>
