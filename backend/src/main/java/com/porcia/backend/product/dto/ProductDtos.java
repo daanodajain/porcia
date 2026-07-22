@@ -8,11 +8,28 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public final class ProductDtos {
 
     private ProductDtos() {
     }
+
+    /** Single image URL sent from frontend */
+    public record ImageUrlRequest(
+            String url,
+            String altText,
+            String type,        // "PRIMARY", "GALLERY"
+            Integer displayOrder
+    ) {}
+
+    /** Image URL returned in response */
+    public record ImageUrlResponse(
+            String url,
+            String altText,
+            String type,
+            Integer displayOrder
+    ) {}
 
     public record CreateProductRequest(
             @NotBlank @Size(max = 255) String name,
@@ -21,12 +38,13 @@ public final class ProductDtos {
             @NotNull Long categoryId,
             @NotNull Long brandId,
             Long collectionId,
-            String description, // short_description
+            String description,
             @NotNull @DecimalMin("0.0") BigDecimal mrp,
             @NotNull @DecimalMin("0.0") BigDecimal sellingPrice,
             Integer stockQuantity,
             @NotNull Boolean isActive,
-            String status
+            String status,
+            List<ImageUrlRequest> images   // WordPress image URLs
     ) {
     }
 
@@ -37,12 +55,13 @@ public final class ProductDtos {
             @NotNull Long categoryId,
             @NotNull Long brandId,
             Long collectionId,
-            String description, // short_description
+            String description,
             @NotNull @DecimalMin("0.0") BigDecimal mrp,
             @NotNull @DecimalMin("0.0") BigDecimal sellingPrice,
             Integer stockQuantity,
             @NotNull Boolean isActive,
-            String status
+            String status,
+            List<ImageUrlRequest> images   // WordPress image URLs
     ) {
     }
 
@@ -61,7 +80,8 @@ public final class ProductDtos {
             LocalDateTime publishedAt,
             CategoryDtos.CategoryResponse category,
             BrandDtos.BrandResponse brand,
-            CollectionDtos.CollectionResponse collection
+            CollectionDtos.CollectionResponse collection,
+            List<ImageUrlResponse> images  // all image URLs
     ) {
     }
 }
