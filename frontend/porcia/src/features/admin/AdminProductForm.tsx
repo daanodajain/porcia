@@ -275,7 +275,7 @@ export function AdminProductForm({ productId }: { productId?: string }) {
             <ol className="mt-1.5 ml-4 list-decimal space-y-0.5 text-blue-500">
               <li>cms.theporcia.com/wp-admin → Media → Add New</li>
               <li>Image upload karo</li>
-              <li>Image pe click karo → right side mein "Copy URL to clipboard"</li>
+              <li>Image pe click karo → right side mein &apos;Copy URL to clipboard&apos;</li>
               <li>Upar wale box mein paste karo</li>
             </ol>
           </div>
