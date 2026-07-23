@@ -74,33 +74,22 @@ export interface AcfHousePage {
 }
 
 export interface HomeAcf {
-  // Section 1 — Hero
   hero_title?: string;
-  hero_descrption?: string;  // Note: WP field has typo, kept as-is
+  hero_descrption?: string;
   hero_media_link?: string;
   hero_button_text?: string;
   hero_button_link?: string;
-
-  // Section 2 — Brand Statement
   statement_label?: string;
   statement_heading?: string;
   statement_body?: string;
-
-  // Section 3 — Featured Collection
   collection_label?: string;
   collection_heading?: string;
   collection_link_text?: string;
   collection_link_url?: string;
   collection_image?: string;
-
-  // Section 4 — House Pages
   house_label?: string;
   house_heading?: string;
   house_pages?: AcfHousePage[];
-
-  // Section 5 — Journal (no ACF, auto-fetched)
-
-  // Section 6 — Concierge CTA
   concierge_label?: string;
   concierge_heading?: string;
   concierge_body?: string;
@@ -108,11 +97,51 @@ export interface HomeAcf {
   concierge_button_link?: string;
   concierge_secondary_text?: string;
   concierge_secondary_link?: string;
-
-  // Additional fields
   section_1_title?: string;
   section_1_image?: string;
   section_1_text?: string;
+}
+
+// ─── ACF SHOP PAGE TYPES ────────────────────────────────────────────────────
+
+export interface ShopAcf {
+  // Hero banner
+  shop_hero_label?: string;
+  shop_hero_title?: string;
+  shop_hero_subtitle?: string;
+  shop_hero_image?: string;
+  shop_hero_video?: string;
+  // Promo strip / marquee
+  shop_promo_text?: string;
+  // Season tag
+  shop_season_tag?: string;
+}
+
+// ─── ACF FOOTER TYPES ───────────────────────────────────────────────────────
+
+export interface FooterAcf {
+  footer_brand_statement?: string;
+  footer_newsletter_heading?: string;
+  footer_newsletter_subtext?: string;
+  // Social links
+  footer_instagram?: string;
+  footer_facebook?: string;
+  footer_pinterest?: string;
+  footer_tiktok?: string;
+  footer_twitter?: string;
+  footer_youtube?: string;
+  // Bottom bar
+  footer_copyright_name?: string;
+  footer_bottom_text?: string;
+}
+
+// ─── ACF GLOBAL SETTINGS PAGE ───────────────────────────────────────────────
+// This is a single WP page with slug "global-settings" that holds site-wide ACF
+
+export interface GlobalSettingsAcf extends FooterAcf {
+  // Marquee ticker
+  marquee_text?: string;
+  marquee_enabled?: boolean;
 }
 
 // ─── HELPERS ────────────────────────────────────────────────────────────────
@@ -193,7 +222,6 @@ export async function getWordPressPages(limit = 100) {
   ).catch(() => []);
 }
 
-// Slugs shown only in footer, never in the top nav
 const FOOTER_ONLY_SLUGS = new Set([
   "home",
   "privacy-policy",
@@ -204,6 +232,8 @@ const FOOTER_ONLY_SLUGS = new Set([
   "cart",
   "checkout",
   "my-account",
+  "global-settings",
+  "shop-settings",
 ]);
 
 export async function getWordPressNavigation() {
@@ -256,14 +286,38 @@ export async function getWordPressPage(routeKey: WordPressPageKey, fallbackSlug?
 
 // ─── ACF-SPECIFIC FETCHERS ───────────────────────────────────────────────────
 
+// ─── CUSTOM PORCIA ACF ENDPOINT ─────────────────────────────────────────────
+// Uses /wp-json/porcia/v1/page-acf/<slug> (mu-plugin: porcia-acf-api.php)
+
+async function fetchPorciaAcf<T>(slug: string): Promise<T> {
+  const base = trimSlash(wordpress.baseUrl).replace("/wp/v2", "");
+  const response = await fetch(`${base}/porcia/v1/page-acf/${slug}`, {
+    next: { revalidate: wordpress.revalidateSeconds },
+  });
+  if (!response.ok) throw new Error(`ACF fetch failed: ${response.status}`);
+  const data = await response.json();
+  return (data.acf ?? {}) as T;
+}
+
 export async function getHomePageAcf(): Promise<HomeAcf> {
   try {
-    const pages = await fetchWordPress<WordPressPage[]>(
-      `/pages?slug=home&acf_format=standard&_fields=acf,slug,title`
-    );
-    const page = pages[0];
-    if (!page?.acf) return {};
-    return page.acf as HomeAcf;
+    return await fetchPorciaAcf<HomeAcf>("home");
+  } catch {
+    return {};
+  }
+}
+
+export async function getShopPageAcf(): Promise<ShopAcf> {
+  try {
+    return await fetchPorciaAcf<ShopAcf>("shop-settings");
+  } catch {
+    return {};
+  }
+}
+
+export async function getGlobalSettingsAcf(): Promise<GlobalSettingsAcf> {
+  try {
+    return await fetchPorciaAcf<GlobalSettingsAcf>("global-settings");
   } catch {
     return {};
   }
